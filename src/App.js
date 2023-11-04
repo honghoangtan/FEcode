@@ -1,27 +1,70 @@
-import Login from './Components/Login';
+import classNames from 'classnames/bind';
+import styles from './App.scss';
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './Componet/Header';
 
-import ChatRoom from './Components/ChatRoom';
+import { Container } from 'react-bootstrap';
+import { useEffect } from 'react';
 
-import AuthProvider from './Context/AuthProvider';
-import AppProvider from './Context/AppProvider';
-import AddRoomModal from './Components/Modal/AddRoomModal';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { Routes, Route, useNavigate } from 'react-router-dom';
+
+import { useContext } from 'react';
+
+import { UserContext } from './Componet/context/UserContext';
+import AppRoutes from './routes/AppRoutes';
+
+import Home from './Componet/layout/Home';
+import TableUsers from './Componet/TableUsers';
+import Login from './Componet/layout/Login';
+
+const cx = classNames.bind(styles);
 
 function App() {
-    return (
-        <Router>
-            <AuthProvider>
-                <AppProvider>
-                    <Routes>
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/" element={<ChatRoom />} />
-                    </Routes>
+    // const navigate = useNavigate();
+    // useEffect(() => {
+    //     let token = localStorage.getItem('token');
+    //     if (token) {
+    //         return;
+    //     }
 
-                    <AddRoomModal />
-                </AppProvider>
-            </AuthProvider>
-        </Router>
+    //     navigate('/login');
+    // }, []);
+
+    const { email, login } = useContext(UserContext);
+
+    console.log(email);
+
+    useEffect(() => {
+        if (localStorage.getItem('token')) {
+            login(localStorage.getItem('email'), localStorage.getItem('token'));
+        }
+    }, []);
+
+    return (
+        <>
+            <div className={cx('app-container')}>
+                <Header />
+                <Container>
+                    <AppRoutes />
+                </Container>
+            </div>
+
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
+        </>
     );
 }
 

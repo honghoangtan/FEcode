@@ -3,15 +3,29 @@ import ReactDOM from 'react-dom/client';
 import App from '~/App';
 import reportWebVitals from './reportWebVitals';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 // import GlobalStyles from './components/GlobalStyles';
+
+import { BrowserRouter } from 'react-router-dom';
+
+import { UserProvider } from '~/Componet/context/UserContext';
+
+import store from '~/reudx/store';
+import { Provider } from 'react-redux';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <React.StrictMode>
-        <App />
-        {/* <GlobalStyles>
+    <Provider store={store}>
+        <React.StrictMode>
+            <UserProvider>
+                <BrowserRouter>
+                    <App />
+                </BrowserRouter>
+            </UserProvider>
+            {/* <GlobalStyles>
         </GlobalStyles> */}
-    </React.StrictMode>,
+        </React.StrictMode>
+    </Provider>,
 );
 
 // If you want to start measuring performance in your app, pass a function
