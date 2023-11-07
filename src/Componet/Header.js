@@ -9,20 +9,32 @@ import { useLocation, NavLink, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { useContext, useEffect, useState } from 'react';
-import { UserContext } from './context/UserContext';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { handleLogoutRedux } from '~/reudx/actions/userActions';
 
 function Header(props) {
     const location = useLocation();
 
     const navigate = useNavigate();
 
-    const { logout, email } = useContext(UserContext);
+    const user = useSelector((state) => state.user.account);
+
+    const dispatch = useDispatch();
 
     const handleLogout = () => {
-        logout();
-        navigate('/login');
-        toast.success('Logout success');
+        dispatch(handleLogoutRedux());
+        // logout();
+        // navigate('/login');
+        // toast.success('Logout success');
     };
+
+    useEffect(() => {
+        if (user && user.auth === false && window.location.pathname !== '/login') {
+            navigate('/');
+            toast.success('Log out success!');
+        }
+    }, [user]);
 
     const [hideHeader, setHideHeader] = useState(true);
 
@@ -31,6 +43,9 @@ function Header(props) {
     //         setHideHeader(false);
     //     }
     // }, []);
+
+    const a = null;
+    console.log(a.abc);
 
     return (
         <Navbar expand="lg" className="bg-body-tertiary">
@@ -47,7 +62,7 @@ function Header(props) {
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    {((email && email.auth) || window.location.pathname === '/') && (
+                    {((user && user.auth) || window.location.pathname === '/') && (
                         <>
                             <Nav className="me-auto">
                                 <NavLink to="/" className="nav-link">
@@ -60,12 +75,10 @@ function Header(props) {
                             </Nav>
 
                             <Nav>
-                                {email && email.auth === true && (
-                                    <span className="nav-link">Welcome {email.email} </span>
-                                )}
+                                {user && user.auth === true && <span className="nav-link">Welcome {user.email} </span>}
 
                                 <NavDropdown title="Setting" id="basic-nav-dropdown">
-                                    {email && email.auth === true ? (
+                                    {user && user.auth === true ? (
                                         <NavDropdown.Item onClick={() => handleLogout()}>Logout</NavDropdown.Item>
                                     ) : (
                                         <NavLink to="/login" className="dropdown-item">

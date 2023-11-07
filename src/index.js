@@ -8,20 +8,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { BrowserRouter } from 'react-router-dom';
 
-import { UserProvider } from '~/Componet/context/UserContext';
-
 import store from '~/reudx/store';
 import { Provider } from 'react-redux';
+
+import ErrorBoundary from './Componet/ErrorBoundary/Error';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <Provider store={store}>
         <React.StrictMode>
-            <UserProvider>
-                <BrowserRouter>
+            <BrowserRouter>
+                <ErrorBoundary>
                     <App />
-                </BrowserRouter>
-            </UserProvider>
+                </ErrorBoundary>
+            </BrowserRouter>
             {/* <GlobalStyles>
         </GlobalStyles> */}
         </React.StrictMode>

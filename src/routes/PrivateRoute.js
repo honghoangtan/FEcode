@@ -5,11 +5,12 @@ import { useContext } from 'react';
 import { UserContext } from '~/Componet/context/UserContext';
 
 import Alert from 'react-bootstrap/Alert';
+import { useSelector } from 'react-redux';
 
 function PrivateRoute({ children }) {
-    const { email } = useContext(UserContext);
+    const user = useSelector((state) => state.user.account);
 
-    if (email && !email.auth) {
+    if (user && !user.auth) {
         return (
             <>
                 <Alert variant="danger" className="mt-3">

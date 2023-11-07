@@ -19,6 +19,9 @@ import AppRoutes from './routes/AppRoutes';
 import Home from './Componet/layout/Home';
 import TableUsers from './Componet/TableUsers';
 import Login from './Componet/layout/Login';
+import { useDispatch } from 'react-redux';
+
+import { handleRefresh } from './reudx/actions/userActions';
 
 const cx = classNames.bind(styles);
 
@@ -37,9 +40,12 @@ function App() {
 
     console.log(email);
 
+    const dispatch = useDispatch();
+
     useEffect(() => {
         if (localStorage.getItem('token')) {
-            login(localStorage.getItem('email'), localStorage.getItem('token'));
+            // login(localStorage.getItem('email'), localStorage.getItem('token'));
+            dispatch(handleRefresh());
         }
     }, []);
 

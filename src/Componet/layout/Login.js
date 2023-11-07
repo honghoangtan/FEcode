@@ -5,10 +5,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { toast } from 'react-toastify';
 
-import { loginApi } from '~/services/UserService';
-
-import { useContext } from 'react';
-import { UserContext } from '../context/UserContext';
+import { handleLoginRedux } from '~/reudx/actions/userActions';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Login() {
     const navigate = useNavigate();
@@ -18,7 +16,8 @@ function Login() {
 
     const [isShowPassWord, setIsShowPassWord] = useState(false);
 
-    const [loadingApi, setLoadingApi] = useState(false);
+    const isLoading = useSelector((state) => state.user.isLoading);
+    const account = useSelector((state) => state.user.account);
 
     // check dieu kien o app
     // useEffect(() => {
@@ -28,9 +27,7 @@ function Login() {
     //         navigate('/');
     //     }
     // }, []);
-
-    const { user, login } = useContext(UserContext);
-
+    const dispatch = useDispatch();
     const handleChange = (e) => {
         const emailValue = e.target.value;
 
@@ -45,22 +42,22 @@ function Login() {
             return;
         }
 
-        setLoadingApi(true);
-        let res = await loginApi('charles.morris@reqres.in', password);
+        dispatch(handleLoginRedux(email, password));
+        // let res = await loginApi('charles.morris@reqres.in', password);
 
-        console.log('>>> Check res: ', res);
+        // console.log('>>> Check res: ', res);
 
-        if (res && res.token) {
-            const token = JSON.stringify(res.token);
-            login(email, token);
-            navigate('/');
-        } else {
-            // error
-            if (res && res.status === 400) {
-                toast.error(res.data.error);
-            }
-            setLoadingApi(false);
-        }
+        // if (res && res.token) {
+        //     const token = JSON.stringify(res.token);
+        //     login(email, token);
+        //     navigate('/');
+        // } else {
+        //     // error
+        //     if (res && res.status === 400) {
+        //         toast.error(res.data.error);
+        //     }
+        //     setLoadingApi(false);
+        // }
     };
 
     const handlePressEnter = (e) => {
@@ -68,6 +65,12 @@ function Login() {
             handleLogin();
         }
     };
+
+    useEffect(() => {
+        if (account && account.auth === true) {
+            navigate('/');
+        }
+    }, [account]);
 
     return (
         <div className="login-container col-12 col-sm-4">
@@ -98,7 +101,7 @@ function Login() {
                 onClick={() => handleLogin()}
             >
                 {/* <i class="fas fa-circle-notch fa-spin"></i> */}
-                {loadingApi && <FontAwesomeIcon icon={faSpinner} className="fa-spin" />}
+                {isLoading && <FontAwesomeIcon icon={faSpinner} className="fa-spin" />}
                 &nbsp; Login
             </button>
 
