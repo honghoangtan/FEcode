@@ -1,0 +1,18 @@
+.image-container {
+    display: flex;
+    .image-red {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+    }
+    .image-green {
+        width: 100px;
+        height: 100px;
+        background-color: green;
+    }
+    .image-yellow {
+        width: 100px;
+        height: 100px;
+        background-color: yellow;
+    }
+}

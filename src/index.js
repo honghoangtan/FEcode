@@ -6,25 +6,17 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import GlobalStyles from './components/GlobalStyles';
 
-import { BrowserRouter } from 'react-router-dom';
-
-import store from '~/reudx/store';
 import { Provider } from 'react-redux';
 
-import ErrorBoundary from './Componet/ErrorBoundary/Error';
+import store from './Redux/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <Provider store={store}>
         <React.StrictMode>
-            <BrowserRouter>
-                <ErrorBoundary>
-                    <App />
-                </ErrorBoundary>
-            </BrowserRouter>
-            {/* <GlobalStyles>
-        </GlobalStyles> */}
+            <App />
         </React.StrictMode>
+        ,
     </Provider>,
 );
 

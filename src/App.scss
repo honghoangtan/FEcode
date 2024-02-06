@@ -1,74 +1,83 @@
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+// code {
+//     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+// }
+
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-size: 40px;
+    color: blue;
 }
 
-.app-container {
-    .login-container {
-        display: flex;
-        flex-direction: column;
-        margin: 0 auto;
+// .app-container {
+//     .login-container {
+//         display: flex;
+//         flex-direction: column;
+//         margin: 0 auto;
 
-        .title {
-            text-align: center;
-            font-size: 23px;
-            font-weight: 600;
-            padding-top: 30px;
-        }
+//         .title {
+//             text-align: center;
+//             font-size: 23px;
+//             font-weight: 600;
+//             padding-top: 30px;
+//         }
 
-        .text {
-            font-weight: 600;
-            padding-bottom: 5px;
-        }
+//         .text {
+//             font-weight: 600;
+//             padding-bottom: 5px;
+//         }
 
-        input {
-            padding: 12px 7px;
-            background-color: #1816230f;
-            border: #1816230f;
-            outline: none;
-            border-radius: 3px;
-            width: 100%;
-            margin-top: 10px;
+//         input {
+//             padding: 12px 7px;
+//             background-color: #1816230f;
+//             border: #1816230f;
+//             outline: none;
+//             border-radius: 3px;
+//             width: 100%;
+//             margin-top: 10px;
 
-            &:hover {
-                background-color: #dedede;
-            }
-        }
+//             &:hover {
+//                 background-color: #dedede;
+//             }
+//         }
 
-        .input-2 {
-            position: relative;
+//         .input-2 {
+//             position: relative;
 
-            .eye-icon {
-                position: absolute;
-                top: 50%;
-                right: 5%;
-                cursor: pointer;
-            }
-        }
+//             .eye-icon {
+//                 position: absolute;
+//                 top: 50%;
+//                 right: 5%;
+//                 cursor: pointer;
+//             }
+//         }
 
-        .button {
-            margin-top: 15px;
-            padding: 10px;
-            border-radius: 3px;
-            background-color: rgba(22, 24, 35, 0.06);
+//         .button {
+//             margin-top: 15px;
+//             padding: 10px;
+//             border-radius: 3px;
+//             background-color: rgba(22, 24, 35, 0.06);
 
-            &.active {
-                background-color: #fe2c55;
-                color: #fff;
-            }
-        }
+//             &.active {
+//                 background-color: #fe2c55;
+//                 color: #fff;
+//             }
+//         }
 
-        button[disabled='disable'],
-        button:disabled {
-            cursor: not-allowed;
-        }
+//         button[disabled='disable'],
+//         button:disabled {
+//             cursor: not-allowed;
+//         }
 
-        .back {
-            text-align: center;
-            margin-top: 20px;
-            cursor: pointer;
-            span {
-                margin-left: 5px;
-            }
-        }
-    }
-}
+//         .back {
+//             text-align: center;
+//             margin-top: 20px;
+//             cursor: pointer;
+//             span {
+//                 margin-left: 5px;
+//             }
+//         }
+//     }
+// }

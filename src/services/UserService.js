@@ -1,26 +1,63 @@
 // import axios from 'axios';
 
-import axios from './customize-axios';
+import axios from '../axios/axios';
 
-// promise
-function fetchAllUser(page) {
-    return axios.get(`/api/users?page=${page}`);
-}
-
-const postCreateUser = (name, job) => {
-    return axios.post('/api/users', { name, job });
+const registerNewUser = (email, username, password, phone) => {
+    return axios.post('/api/v1/register', {
+        email,
+        username,
+        password,
+        phone,
+    });
 };
 
-const putUpdateUset = (name, job) => {
-    return axios.post('/api/users/2', { name, job });
+const loginUser = (valueLogin, password) => {
+    return axios.post('/api/v1/login', {
+        valueLogin,
+        password,
+    });
 };
 
-const deleteUser = (id) => {
-    return axios.delete(`/api/users/${id}`);
+const fetchAllUser = (currentPage, currentLimit) => {
+    return axios.get(`/api/v1/user/read?page=${currentPage}&limit=${currentLimit}`);
 };
 
-const loginApi = (email, password) => {
-    return axios.post('/api/login', { email, password });
+const deleteUser = (user) => {
+    return axios.delete('/api/v1//user/delete', {
+        data: {
+            id: user.id,
+        },
+    });
 };
 
-export { fetchAllUser, postCreateUser, putUpdateUset, deleteUser, loginApi };
+const fetchGroups = () => {
+    return axios.get('/api/v1/group/read');
+};
+
+const createNewUser = (userData) => {
+    return axios.post('/api/v1/user/create', { ...userData });
+};
+
+const updateCurrentUser = (userData) => {
+    return axios.put('/api/v1/user/update', { ...userData });
+};
+
+const getUserAccount = () => {
+    return axios.get('/api/v1/account');
+};
+
+const logoutUser = () => {
+    return axios.post('/api/v1/logout');
+};
+
+export {
+    registerNewUser,
+    loginUser,
+    fetchAllUser,
+    deleteUser,
+    fetchGroups,
+    createNewUser,
+    updateCurrentUser,
+    getUserAccount,
+    logoutUser,
+};
